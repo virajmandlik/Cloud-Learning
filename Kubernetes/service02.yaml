@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: python-service
+  namespace: development
+spec:
+  selector:
+    app: python-app  # <--- You nailed this!
+  ports:
+    - protocol: TCP
+      port: 80           # The Service Phone Number
+      targetPort: 8000   # The Container's Phone Extension

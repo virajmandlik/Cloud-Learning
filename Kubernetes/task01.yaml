@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-app
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-app
+  template:
+    metadata:
+      labels:
+        app: nginx-app
+    spec:
+      containers:
+      # 1. Main Application Container
+      - name: node-server
+        image: nginx  # <--- Fill this in
+        ports:
+        - containerPort: 80 # <--- And this
+      # 2. Sidecar Container (The Helper)
+      - name: debug-sidecar
+        image: busybox
+        command: ["/bin/sh", "-c", "while true; do sleep 3600; done"]
